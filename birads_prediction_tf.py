@@ -76,10 +76,14 @@ def inference(parameters, verbose=True):
                 birads0_prob = prediction_birads[0][0]
                 birads1_prob = prediction_birads[0][1]
                 birads2_prob = prediction_birads[0][2]
-                print('BI-RADS prediction:\n' +
-                      '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
-                      '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
-                      '\tBI-RADS 2:\t' + str(birads2_prob))
+                if (birads0_prob + birads1_prob) > 0.5 :
+                    print("{ \"result\" : 1 }")
+                else :
+                    print("{ \"result\" : 0 }")
+                #print('BI-RADS prediction:\n' +
+                #      '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
+                #      '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
+                #      '\tBI-RADS 2:\t' + str(birads2_prob))
 
             return prediction_birads[0]
 
