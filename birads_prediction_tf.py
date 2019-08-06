@@ -3,6 +3,7 @@ import tensorflow as tf
 
 import models_tf as models
 import utils
+import json
 
 
 def inference(parameters, verbose=True):
@@ -77,9 +78,11 @@ def inference(parameters, verbose=True):
                 birads1_prob = prediction_birads[0][1]
                 birads2_prob = prediction_birads[0][2]
                 if (birads0_prob + birads1_prob) > 0.5 :
-                    print("{ \"result\" : 1 }")
+                    result = { 'result' : 1 }
                 else :
-                    print("{ \"result\" : 0 }")
+                    result = { 'result' : 0 }
+                with open('result.json', 'w') as json_file:
+                    json.dump(result, json_file)
                 #print('BI-RADS prediction:\n' +
                 #      '\tBI-RADS 0:\t' + str(birads0_prob) + '\n' +
                 #      '\tBI-RADS 1:\t' + str(birads1_prob) + '\n' +
